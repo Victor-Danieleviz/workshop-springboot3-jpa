@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.dilevz.couse.entities.Category;
 import com.dilevz.couse.entities.Order;
+import com.dilevz.couse.entities.OrderItem;
 import com.dilevz.couse.entities.Product;
 import com.dilevz.couse.entities.User;
 import com.dilevz.couse.entities.enums.OrderStatus;
 import com.dilevz.couse.repositories.CategoryRepository;
+import com.dilevz.couse.repositories.OrderItemRepository;
 import com.dilevz.couse.repositories.OrderRepository;
 import com.dilevz.couse.repositories.ProductRepository;
 import com.dilevz.couse.repositories.UserRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -67,6 +72,12 @@ public class TestConfig implements CommandLineRunner{
 		
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p4.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p1.getPrice());
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3));
 	}
 	
 	
